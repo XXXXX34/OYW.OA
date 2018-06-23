@@ -1,0 +1,33 @@
+.paginationjq {
+            font-size: 12px;
+            margin-top:3px;
+        }
+        
+.paginationjq a {
+    display:inline-block;
+    text-decoration: none;
+	border: solid 1px #ddd;
+	color: #15B;
+   
+}
+
+.paginationjq a, .paginationjq span {
+    display: block;
+    float: left;
+    padding: 4px 8px;
+    margin-right: 5px;
+	margin-bottom: 5px;
+
+}
+
+.paginationjq .current {
+    background: #EEEEEE;
+    color:#428bca ;
+	border: solid 1px #ddd;
+}
+
+.paginationjq .current.prev, .paginationjq .current.next{
+	color:#999;
+	border-color:#999;
+	background:#fff;
+}

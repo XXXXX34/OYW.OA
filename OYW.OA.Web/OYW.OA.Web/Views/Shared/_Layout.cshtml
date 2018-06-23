@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OYW.OA.Web</title>
+    <title>全球OA系统</title>
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -15,59 +15,362 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-</head>
-<body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">OYW.OA.Web</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
-    <partial name="_CookieConsentPartial" />
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - OYW.OA.Web</p>
-        </footer>
-    </div>
 
     <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <link rel="stylesheet" href="~/js/Lib/bootstrap-3.3.7-dist/css/bootstrap.css" />
     </environment>
     <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
+        <link rel="stylesheet" href="~/js/Lib/bootstrap-3.3.7-dist/css/bootstrap.css" asp-append-version="true" />
     </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/bootstrap-3.3.7-dist/css/bootstrap-theme.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/bootstrap-3.3.7-dist/css/bootstrap-theme.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/base.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/base.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/css/pagination.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/css/pagination.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/toastr/css/toastr.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/toastr/css/toastr.min.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/dynatree-1.2.4/skin/ui.dynatree.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/dynatree-1.2.4/skin/ui.dynatree.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/dynatree-1.2.4/skin-vista/ui.dynatree.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/dynatree-1.2.4/skin-vista/ui.dynatree.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/easyvalidator/css/validate.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/easyvalidator/css/validate.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/nprogress/nprogress.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/nprogress/nprogress.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/DatePicker/skin/default/datepicker.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/DatePicker/skin/default/datepicker.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/WebUploader/webuploader.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/WebUploader/webuploader.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/WebUploader/webuploaderui.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/WebUploader/webuploaderui.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/wheelmenu/animate.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/wheelmenu/animate.min.css" asp-append-version="true" />
+    </environment>
+
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/wheelmenu/styles.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/wheelmenu/styles.css" asp-append-version="true" />
+    </environment>
+
+
+
+    <environment include="Development">
+        <script src="~/js/jquery-3.1.1.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/jquery-3.1.1.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <environment include="Development">
+        <script src="~/js/Lib/jquery-ui-1.12.1/jquery-ui.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/jquery-ui-1.12.1/jquery-ui.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/dynatree-1.2.4/jquery.dynatree.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/dynatree-1.2.4/jquery.dynatree.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/bootstrap-3.3.7-dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/layoutPlugin.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/layoutPlugin.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/jquery.pagination.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/jquery.pagination.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/toastr/toastr.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/toastr/toastr.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/bootbox/bootbox.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/bootbox/bootbox.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/DatePicker/WdatePicker.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/DatePicker/WdatePicker.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/way/way.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/way/way.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/easyvalidator/js/easy_validator.pack.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/easyvalidator/js/easy_validator.pack.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/jquery.nicescroll/jquery.nicescroll.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/jquery.nicescroll/jquery.nicescroll.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/easyvalidator/js/jquery.bgiframe.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/easyvalidator/js/jquery.bgiframe.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/nprogress/nprogress.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/nprogress/nprogress.js" asp-append-version="true"></script>
+    </environment>
+
+
+
+    <environment include="Development">
+        <script src="~/js/jquery.signalR-2.2.2.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/jquery.signalR-2.2.2.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <environment include="Development">
+        <script src="~/js/Lib/ckeditor_4.6.2/ckeditor.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/ckeditor_4.6.2/ckeditor.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <environment include="Development">
+        <script src="~/js/Lib/jquery-ui-portal/js/jquery.cookie.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/jquery-ui-portal/js/jquery.cookie.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <environment include="Development">
+        <script src="~/js/base.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/base.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/im_base.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/im_base.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/workflowbase.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/workflowbase.js" asp-append-version="true"></script>
+    </environment>
+
+    <script type="text/javascript">
+        $(function () {
+            setlayout();
+
+
+        });
+
+
+        function callbackParentResizeChange() {
+            setlayout();
+            try {
+                setTimeout(function () {
+                    ohyewang();
+                }, 100);
+            } catch (e) {
+
+            }
+        }
+    </script>
+
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">
+            <span class="glyphicon glyphicon-globe glyphicon-globe" aria-hidden="true"></span>
+        </div>
+        <div class="projectname">
+            全球OA系统
+        </div>
+        <div class="banner">
+            <ul>
+                <li>
+                    <div class="item">
+                        <a href="javascript:" onclick="showNotify()">
+                            <span class="glyphicon glyphicon-bell " aria-hidden="true"></span>
+                            <span id="notifycount" class="badge infocount">0</span>
+                        </a>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="item">
+                        <a href="javascript:" onclick="showOnline()">
+                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                            <span class="">在线<span id="txtOnlineUserConut">0</span>人<span style="margin-left:20px">未读(<span id="txtNotReadCount"></span>)</span></span>
+                        </a>
+                    </div>
+                </li>
+
+
+                <li class="dropdown">
+                    <div class="item">
+                        <a href="javascript:" onclick="showPeopleinfo()">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            <span id="header-username"></span>
+                        </a>
+                    </div>
+                </li>
+                <li>
+                    <div class="item">
+                        <a href="/Home/LoginOut" target="_self">
+                            <span class="glyphicon glyphicon-off">
+                            </span>
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div id="container">
+        <div id="oa-app">
+            <ul>
+                <li title="" style="position:relative"> <a href="" target="_self" name="" class=""><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span></a> </li>
+            </ul>
+        </div>
+        <div id="oa-left">
+            <div id="oa-left-title" class="title"></div>
+            <div id="oa-submenus" class="oamenu">
+                <ul></ul>
+            </div>
+        </div>
+        <div id="oa-split">
+            <span></span>
+        </div>
+        <div id="oa-right" style="visibility:hidden">
+            @RenderBody()
+
+        </div>
+
+    </div>
+
+    <div id="dlg_all" style="position:absolute"></div>
 
     @RenderSection("Scripts", required: false)
 </body>

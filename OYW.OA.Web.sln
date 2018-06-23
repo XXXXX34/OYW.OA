@@ -3,7 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.Web", "OYW.OA.Web\OYW.OA.Web\OYW.OA.Web.csproj", "{087E6349-A239-42C0-A987-F79BB7DC3733}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.Web", "OYW.OA.Web\OYW.OA.Web\OYW.OA.Web.csproj", "{087E6349-A239-42C0-A987-F79BB7DC3733}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.EFRepositories", "OYW.OA.EFRepositories\OYW.OA.EFRepositories.csproj", "{65E618A0-B093-45C6-88D1-F07CA87269AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.Infrastructure", "OYW.OA.Infrastructure\OYW.OA.Infrastructure.csproj", "{E383AFBF-4C58-48CF-9284-2C0311FFE2DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.Domain", "OYW.OA.Domain\OYW.OA.Domain.csproj", "{0DE1C237-FD70-4C9D-86F9-5C26AAE5ABF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.DTO", "OYW.OA.DTO\OYW.OA.DTO.csproj", "{E2EC54E4-99C6-46AD-AC31-B0619E7C8DDC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{02602327-176B-40CF-8903-D8F9CB02C15D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{E75DCD8B-5CB0-4975-A0CE-BA4DF1D7E4C2}"
+	ProjectSection(SolutionItems) = preProject
+		initDataBase.sql = initDataBase.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +30,28 @@ Global
 		{087E6349-A239-42C0-A987-F79BB7DC3733}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087E6349-A239-42C0-A987-F79BB7DC3733}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087E6349-A239-42C0-A987-F79BB7DC3733}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E618A0-B093-45C6-88D1-F07CA87269AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E618A0-B093-45C6-88D1-F07CA87269AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E618A0-B093-45C6-88D1-F07CA87269AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E618A0-B093-45C6-88D1-F07CA87269AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E383AFBF-4C58-48CF-9284-2C0311FFE2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E383AFBF-4C58-48CF-9284-2C0311FFE2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E383AFBF-4C58-48CF-9284-2C0311FFE2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E383AFBF-4C58-48CF-9284-2C0311FFE2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE1C237-FD70-4C9D-86F9-5C26AAE5ABF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE1C237-FD70-4C9D-86F9-5C26AAE5ABF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE1C237-FD70-4C9D-86F9-5C26AAE5ABF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE1C237-FD70-4C9D-86F9-5C26AAE5ABF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2EC54E4-99C6-46AD-AC31-B0619E7C8DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2EC54E4-99C6-46AD-AC31-B0619E7C8DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2EC54E4-99C6-46AD-AC31-B0619E7C8DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2EC54E4-99C6-46AD-AC31-B0619E7C8DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E75DCD8B-5CB0-4975-A0CE-BA4DF1D7E4C2} = {02602327-176B-40CF-8903-D8F9CB02C15D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9578BBC3-14CA-4F40-A48E-3DB167F5288D}
