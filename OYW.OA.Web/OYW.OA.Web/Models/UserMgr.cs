@@ -24,5 +24,11 @@ namespace OYW.OA.Web.Models
         {
             return _redisHelper.Get<OAUser>(sessionID);
         }
+
+        public void ClearUser(string sessionID)
+        {
+            _redisHelper.Set<OAUser>(sessionID, null, TimeSpan.FromSeconds(1));
+        }
+
     }
 }

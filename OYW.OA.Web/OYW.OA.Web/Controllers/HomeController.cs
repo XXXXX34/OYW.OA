@@ -47,5 +47,23 @@ namespace OYW.OA.Web.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        public ActionResult LoginOut()
+        {
+            try
+            {
+                string sessionid_cookie_value = null;
+                Request.Cookies.TryGetValue("oa.sessionid", out sessionid_cookie_value);
+                if (sessionid_cookie_value != null)
+                {
+                    userMgr.ClearUser(sessionid_cookie_value);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
