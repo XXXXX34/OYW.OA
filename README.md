@@ -5,6 +5,8 @@
 
 数据库：MSSQL
 
+NoSQL:Redis
+
 用户名：admin  密码：admin
 
 后续将继续完善....
