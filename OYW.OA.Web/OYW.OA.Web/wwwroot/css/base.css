@@ -10,79 +10,79 @@
     min-width: 1224px;
 }
 
-.header .logo {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    float: left;
-}
+    .header .logo {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        float: left;
+    }
 
-.header .logo span {
-    vertical-align: middle;
-    font-size: 25px;
-    margin-left: 10px;
-}
+        .header .logo span {
+            vertical-align: middle;
+            font-size: 25px;
+            margin-left: 10px;
+        }
 
-.header .projectname {
-    float: left;
-    padding-left: 30px;
-}
+    .header .projectname {
+        float: left;
+        padding-left: 30px;
+    }
 
-.header .banner {
-    float: right;
-    color: #FFF;
-    right: 20px;
-    height: 50px;
-    font-size: 12px;
-}
+    .header .banner {
+        float: right;
+        color: #FFF;
+        right: 20px;
+        height: 50px;
+        font-size: 12px;
+    }
 
-.header .banner ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
+        .header .banner ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
 
-.header .banner ul li {
-    margin: 0;
-    vertical-align: middle;
-    overflow: hidden;
-    float: left;
-    height: 50px;
-    line-height: 50px;
-}
+            .header .banner ul li {
+                margin: 0;
+                vertical-align: middle;
+                overflow: hidden;
+                float: left;
+                height: 50px;
+                line-height: 50px;
+            }
 
-.header .banner ul li .item {
-    vertical-align: middle;
-}
+                .header .banner ul li .item {
+                    vertical-align: middle;
+                }
 
-.header .banner ul li .item .infoico {
-    font-size: 15px;
-    margin-right: 10px;
-}
+                    .header .banner ul li .item .infoico {
+                        font-size: 15px;
+                        margin-right: 10px;
+                    }
 
-.header .banner ul li .item .infocount {
-    font-size: 11px;
-    background-color: #ff9900;
-}
+                    .header .banner ul li .item .infocount {
+                        font-size: 11px;
+                        background-color: #ff9900;
+                    }
 
-.header .banner ul li:hover {
-    background-color: #616570;
-}
+                .header .banner ul li:hover {
+                    background-color: #616570;
+                }
 
-.header .banner ul li a {
-    text-decoration: none;
-    cursor: pointer;
-    color: white;
-    vertical-align: middle;
-    display: block;
-    padding: 0 12px;
-    width: 100%;
-    height: 100%;
-}
+                .header .banner ul li a {
+                    text-decoration: none;
+                    cursor: pointer;
+                    color: white;
+                    vertical-align: middle;
+                    display: block;
+                    padding: 0 12px;
+                    width: 100%;
+                    height: 100%;
+                }
 
-.header .banner ul li span {
-    vertical-align: middle;
-}
+                .header .banner ul li span {
+                    vertical-align: middle;
+                }
 
 #container {
 }
@@ -95,39 +95,39 @@
     float: left;
 }
 
-#oa-app ul {
-    margin: 10px 0 0 0;
-    color: #FFF;
-    margin: 0;
-    padding: 0;
-}
+    #oa-app ul {
+        margin: 10px 0 0 0;
+        color: #FFF;
+        margin: 0;
+        padding: 0;
+    }
 
-#oa-app ul li {
-    margin-bottom: 5px;
-    display: block;
-    width: 50px;
-    height: 45px;
-    line-height: 45px;
-    vertical-align: middle;
-    text-align: center;
-}
+        #oa-app ul li {
+            margin-bottom: 5px;
+            display: block;
+            width: 50px;
+            height: 45px;
+            line-height: 45px;
+            vertical-align: middle;
+            text-align: center;
+        }
 
-#oa-app ul li a {
-    text-decoration: none;
-    color: #FFF;
-    display: block;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
+            #oa-app ul li a {
+                text-decoration: none;
+                color: #FFF;
+                display: block;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
 
-#oa-app ul li a:hover {
-    background-color: #00C1DE;
-}
+                #oa-app ul li a:hover {
+                    background-color: #00C1DE;
+                }
 
-#oa-app ul li a.selected {
-    background-color: #00C1DE;
-}
+                #oa-app ul li a.selected {
+                    background-color: #00C1DE;
+                }
 
 #oa-left {
     height: 1000px;
@@ -136,52 +136,52 @@
     float: left;
 }
 
-#oa-left .title {
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    background-color: #D9DEE4;
-    font-weight: bold;
-    font-size: 12px;
-}
+    #oa-left .title {
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+        padding-left: 20px;
+        background-color: #D9DEE4;
+        font-weight: bold;
+        font-size: 12px;
+    }
 
-#oa-left .menu {
-}
+    #oa-left .oamenu {
+    }
 
-#oa-left .menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
+        #oa-left .oamenu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
 
-#oa-left .menu ul li {
-    margin: 0;
-    padding: 0;
-    line-height: 45px;
-    height: 45px;
-    margin-bottom: 5px;
-}
+            #oa-left .oamenu ul li {
+                margin: 0;
+                padding: 0;
+                line-height: 45px;
+                height: 45px;
+                margin-bottom: 5px;
+            }
 
-#oa-left .menu ul li .item {
-    padding-left: 30px;
-}
+                #oa-left .oamenu ul li .item {
+                    padding-left: 30px;
+                }
 
-#oa-left .menu ul .item:hover {
-    background-color: white;
-}
+            #oa-left .oamenu ul .item:hover {
+                background-color: white;
+            }
 
-#oa-left .menu ul .item.selected {
-    background-color: white;
-}
+            #oa-left .oamenu ul .item.selected {
+                background-color: white;
+            }
 
-#oa-left .menu ul li .item a {
-    text-decoration: none;
-    display: block;
-    color: black;
-    font-size: 12px;
-    cursor: pointer;
-}
+        #oa-left .oamenu li .item a {
+            text-decoration: none;
+            display: block;
+            color: black;
+            font-size: 12px;
+            cursor: pointer;
+        }
 
 #oa-split {
     width: 10px;
@@ -197,9 +197,9 @@
     overflow: hidden;
 }
 
-#oa-right .oa-searchBar {
-    background: #F8FAFC;
-}
+    #oa-right .oa-searchBar {
+        background: #F8FAFC;
+    }
 
 .oa-searchBar .oa-searchField {
     display: inline-block;
@@ -207,57 +207,57 @@
     padding: 0;
 }
 
-.oa-searchBar .oa-searchField label {
-    font-weight: normal !important;
-}
+    .oa-searchBar .oa-searchField label {
+        font-weight: normal !important;
+    }
 
-.oa-searchBar .oa-searchField ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    margin-top: 8px;
-}
+    .oa-searchBar .oa-searchField ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        margin-top: 8px;
+    }
 
-.oa-searchBar .oa-searchField ul li {
-    float: left;
-    margin: 0;
-    padding: 0;
-    margin-left: 6px;
-}
+        .oa-searchBar .oa-searchField ul li {
+            float: left;
+            margin: 0;
+            padding: 0;
+            margin-left: 6px;
+        }
 
-.oa-searchBar .oa-searchField ul li span {
-    color: gray;
-}
+            .oa-searchBar .oa-searchField ul li span {
+                color: gray;
+            }
 
-.oa-searchBar .oa-searchField ul li span input {
-    width: 120px;
-    height: 30px;
-    padding: 0px 0px;
-    font-size: 12px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
+                .oa-searchBar .oa-searchField ul li span input {
+                    width: 120px;
+                    height: 30px;
+                    padding: 0px 0px;
+                    font-size: 12px;
+                    line-height: 1.42857143;
+                    color: #555;
+                    background-color: #fff;
+                    background-image: none;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                }
 
-.oa-searchBar .oa-searchField ul li span select {
-    width: 110px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    height: 28px;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-}
+                .oa-searchBar .oa-searchField ul li span select {
+                    width: 110px;
+                    background-color: #fff;
+                    border: 1px solid #ccc;
+                    height: 28px;
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+                }
 
-.oa-searchBar .oa-searchField ul li.searchOperBar {
-    margin-left: 20px;
-}
+            .oa-searchBar .oa-searchField ul li.searchOperBar {
+                margin-left: 20px;
+            }
 
 .checkColumn {
     width: 20px;
@@ -274,18 +274,18 @@
     margin-right: 50px;
 }
 
-.tb-form tr {
-    height: 50px;
-}
+    .tb-form tr {
+        height: 50px;
+    }
 
-.tb-form .td-title {
-    min-width: 100px;
-    text-align: right;
-    padding-right: 10px;
-}
+    .tb-form .td-title {
+        min-width: 100px;
+        text-align: right;
+        padding-right: 10px;
+    }
 
-.tb-form .td-content {
-}
+    .tb-form .td-content {
+    }
 
 .modal-body {
     max-height: 500px !important;
@@ -295,38 +295,38 @@
 #dlg_notify_globle {
 }
 
-#dlg_notify_globle .notify-list {
-    list-style-type: none;
-    margin-left: 20px;
-}
+    #dlg_notify_globle .notify-list {
+        list-style-type: none;
+        margin-left: 20px;
+    }
 
-#dlg_notify_globle .notify-list .notify-item {
-    margin: 0;
-    padding: 0;
-    margin-bottom: 10px;
-    height: 60px;
-    line-height: 20px;
-    border-bottom: 1px solid #eaedf1;
-}
+        #dlg_notify_globle .notify-list .notify-item {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px;
+            height: 60px;
+            line-height: 20px;
+            border-bottom: 1px solid #eaedf1;
+        }
 
-#dlg_notify_globle .notify-list .notify-item a {
-    display: inline-block;
-    max-width: 500px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    color: #06c;
-    cursor: pointer;
-}
+            #dlg_notify_globle .notify-list .notify-item a {
+                display: inline-block;
+                max-width: 500px;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                color: #06c;
+                cursor: pointer;
+            }
 
-#dlg_notify_globle .notify-list .notify-item input {
-    line-height: 20px;
-    height: 20px;
-}
+            #dlg_notify_globle .notify-list .notify-item input {
+                line-height: 20px;
+                height: 20px;
+            }
 
-#dlg_notify_globle .notify-list .notify-creatime {
-    display: block;
-}
+        #dlg_notify_globle .notify-list .notify-creatime {
+            display: block;
+        }
 
 
 #dlg_peopleinfo_globle .row {
@@ -391,4 +391,70 @@
 
 .oa-num11 {
     background-position: 0 -176px;
+}
+
+#oa-app li.hover {
+    background-color: #00C1DE;
+}
+
+#menu-pop-ul {
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    background-color: #2c3b41;
+    z-index: 9000 !important;
+    position: absolute !important;
+    left: 50px;
+    top: 0px;
+    display: none;
+    list-style-type: none;
+}
+
+    #menu-pop-ul ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        #menu-pop-ul ul li:first-child {
+            color: #8aa4af !important;
+            height: 35px;
+            line-height: 35px;
+        }
+
+    #menu-pop-ul li {
+        padding: 0;
+        padding-left: 20px;
+        height: 35px;
+        line-height: 35px;
+        color: #8aa4af;
+        list-style: none;
+    }
+
+        #menu-pop-ul li:first-child {
+            padding: 0;
+            padding-left: 20px;
+            height: 45px;
+            line-height: 45px;
+            margin-top: 10px;
+            color: #8aa4af;
+        }
+
+.menu-pop-ul-content {
+    max-height: 230px;
+    overflow: auto;
+}
+
+    .menu-pop-ul-content li {
+        background-color: transparent !important
+    }
+
+        .menu-pop-ul-content li a {
+            text-decoration: none;
+            color: #8aa4af;
+        }
+
+#menu-pop-ul li:first-child {
+    margin-top: 0 !important;
+    color: white;
+    background-color: #00C1DE;
 }

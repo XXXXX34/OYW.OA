@@ -6,12 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace OYW.OA.Web.Controllers
 {
-    public class WelcomeController : BaseController
+    public class EmplLogonController : BaseController
     {
-        public IActionResult Desktop()
+        public IActionResult Index()
         {
             return View();
         }
-       
     }
 }

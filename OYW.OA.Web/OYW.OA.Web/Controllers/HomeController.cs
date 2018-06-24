@@ -36,7 +36,8 @@ namespace OYW.OA.Web.Controllers
             {
                 OAUser _OAUser = new OAUser
                 {
-                    UserName = user.UserName
+                    UserName = user.UserName,
+                    EmplID = user.EmplID
                 };
 
                 string sessionid = MD5Util.GetMD5(Guid.NewGuid().ToString().Replace("-", ""));
