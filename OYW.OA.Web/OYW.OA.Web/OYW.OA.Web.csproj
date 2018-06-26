@@ -55,9 +55,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\OYW.OA.Domain\OYW.OA.Domain.csproj" />
+    <ProjectReference Include="..\..\OYW.OA.Application\OYW.OA.Application.csproj" />
     <ProjectReference Include="..\..\OYW.OA.DTO\OYW.OA.DTO.csproj" />
-    <ProjectReference Include="..\..\OYW.OA.EFRepositories\OYW.OA.EFRepositories.csproj" />
     <ProjectReference Include="..\..\OYW.OA.Infrastructure\OYW.OA.Infrastructure.csproj" />
   </ItemGroup>
 
