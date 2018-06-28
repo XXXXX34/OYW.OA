@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OYW.OA.Domain\OYW.OA.Domain.csproj" />
     <ProjectReference Include="..\OYW.OA.DTO\OYW.OA.DTO.csproj" />
     <ProjectReference Include="..\OYW.OA.EFRepositories\OYW.OA.EFRepositories.csproj" />

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq.Dynamic.Core;
 
 namespace OYW.OA.Application.Settings
 {
