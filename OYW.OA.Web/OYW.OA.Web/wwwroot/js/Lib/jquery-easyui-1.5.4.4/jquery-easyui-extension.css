@@ -1,5 +1,5 @@
 ﻿
-.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber {
     line-height: 33px !important;
 }
 
@@ -30,3 +30,6 @@
 .panel-body-noheader {
     border-top-width: 0px !important;
 }
+
+
+ 

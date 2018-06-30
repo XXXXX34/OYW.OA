@@ -36,7 +36,7 @@ namespace OYW.OA.Application.People
             var response = new ResponseResult<ORG_UserLogonDTO> { };
             TypeAdapterConfig typeAdapterConfig = new TypeAdapterConfig();
             typeAdapterConfig.NewConfig<ORG_UserLogon, ORG_UserLogonDTO>().Ignore(p => p.IP);
-            response.rows = db.ORG_UserLogon.OrderBy($"{sort} {order}").Adapt<List<ORG_UserLogonDTO>>(typeAdapterConfig);
+            response.rows = db.ORG_UserLogon.OrderBy($"{sort} {order}").Skip((page - 1) * rows).Take(rows).Adapt<List<ORG_UserLogonDTO>>(typeAdapterConfig);
             response.total = db.ORG_UserLogon.Count();
             return response;
         }
