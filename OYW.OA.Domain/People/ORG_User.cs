@@ -8,6 +8,8 @@ namespace OYW.OA.Domain.People
     public partial class ORG_User
     {
         [Key]
+        public Guid ID { get; set; }
+
         [StringLength(50)]
         public string UserName { get; set; }
 

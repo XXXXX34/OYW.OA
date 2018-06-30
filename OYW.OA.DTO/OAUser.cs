@@ -7,6 +7,8 @@ namespace OYW.OA.DTO
     [Serializable]
     public class OAUser
     {
+
+        public Guid ID { get; set; }
         public string UserName { get; set; }
         public string EmplID { get; set; }
 

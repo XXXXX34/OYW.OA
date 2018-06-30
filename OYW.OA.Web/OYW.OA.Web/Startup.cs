@@ -91,7 +91,9 @@ namespace OYW.OA.Web
             string sessionid = "";
             accessor.HttpContext.Request.Cookies.TryGetValue("oa.sessionid", out sessionid);
             var redisHelper = IocManager.Resolve<RedisHelper>();
-            return redisHelper.Get<OAUser>(sessionid);
+            var user = redisHelper.Get<OAUser>(sessionid);
+            if (user == null)  user = new OAUser { }; 
+            return user;
         }
 
         private ILog GetLog()
@@ -103,7 +105,6 @@ namespace OYW.OA.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

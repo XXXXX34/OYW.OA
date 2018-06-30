@@ -18,8 +18,4 @@
     <ProjectReference Include="..\OYW.OA.DTO\OYW.OA.DTO.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Log\" />
-  </ItemGroup>
-
 </Project>

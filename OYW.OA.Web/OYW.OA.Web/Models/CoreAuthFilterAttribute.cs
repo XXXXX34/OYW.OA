@@ -30,7 +30,7 @@ namespace OYW.OA.Web.Models
                 {
                     var redisHelper = IocManager.Resolve<RedisHelper>();
                     OAUser _OAUser = redisHelper.Get<OAUser>(cookie_sessionid);
-                    if (_OAUser != null && _OAUser.LastUpdateTime < DateTime.Now.AddMinutes(-10))
+                    if (_OAUser != null && _OAUser.LastUpdateTime < DateTime.Now.AddMinutes(-30))
                     {
                         _OAUser.LastUpdateTime = DateTime.Now;
                         redisHelper.Set<OAUser>(cookie_sessionid, _OAUser, TimeSpan.FromMinutes(60));//60分钟有效期

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Dynamic.Core;
 using log4net;
+using OYW.OA.Infrastructure.User;
 
 namespace OYW.OA.Application.Settings
 {
@@ -27,11 +28,11 @@ namespace OYW.OA.Application.Settings
         /// 
         public List<SYS_MenuDTO> GetMenus()
         {
-           
+
             var cur_user_id = user.EmplID;
             var menus = db.SYS_Menu.ToList();
             //非管理员
-            if (user.EmplID != "99999999-9999-9999-9999-999999999999")
+            if (user.EmplID != AdminUser.EmplID)
             {
                 var needRemoveLst = new List<Guid>();
                 menus.ForEach(x =>
