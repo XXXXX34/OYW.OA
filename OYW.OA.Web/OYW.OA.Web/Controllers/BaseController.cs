@@ -25,5 +25,7 @@ namespace OYW.OA.Web.Controllers
                 return redisHelper.Get<OAUser>(sessionid);
             }
         }
+        
+
     }
 }

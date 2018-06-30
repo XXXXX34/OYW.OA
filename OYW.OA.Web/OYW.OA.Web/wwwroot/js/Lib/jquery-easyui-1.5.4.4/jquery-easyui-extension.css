@@ -1,0 +1,32 @@
+﻿
+.datagrid-cell, .datagrid-cell-group, .datagrid-header-rownumber, .datagrid-cell-rownumber {
+    line-height: 33px !important;
+}
+
+.datagrid-header td ,.datagrid-body td, .datagrid-footer td {
+    border-color: #ebebeb !important;
+    border-width: 0 1px 1px 0 !important;
+    border-style: solid !important;
+}
+
+.datagrid-header-row {
+    height: 33px !important;
+}
+
+.datagrid-header .datagrid-cell, .datagrid-header .datagrid-cell-group {
+    color: #00517a;
+    font-weight: bold;
+    filter: alpha(opacity=80);
+    opacity: 0.80;
+}
+.datagrid-row-selected a {
+    color: white !important;
+}
+
+.panel-header, .panel-body {
+    border-width: 0px !important;
+}
+
+.panel-body-noheader {
+    border-top-width: 0px !important;
+}

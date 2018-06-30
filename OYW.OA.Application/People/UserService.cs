@@ -28,8 +28,17 @@ namespace OYW.OA.Application.People
             userLogon.UserID = oAUser.ID;
             db.ORG_UserLogon.Add(userLogon);
             db.SaveChanges();
-            //var userTemp = db.ORG_User.Where(p => p.EmplID == AdminUser.EmplID).SingleOrDefault();
-            //var list = userTemp.UserLogonList.ToList();
+        }
+
+
+        public ResponseResult<ORG_UserLogonDTO> GetLogonList(int page, int rows, string sort, string order)
+        {
+            var response = new ResponseResult<ORG_UserLogonDTO> { };
+            TypeAdapterConfig typeAdapterConfig = new TypeAdapterConfig();
+            typeAdapterConfig.NewConfig<ORG_UserLogon, ORG_UserLogonDTO>().Ignore(p => p.IP);
+            response.rows = db.ORG_UserLogon.OrderBy($"{sort} {order}").Adapt<List<ORG_UserLogonDTO>>(typeAdapterConfig);
+            response.total = db.ORG_UserLogon.Count();
+            return response;
         }
     }
 }

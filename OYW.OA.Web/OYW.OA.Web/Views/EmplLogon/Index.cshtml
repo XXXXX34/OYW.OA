@@ -2,6 +2,201 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script type="text/javascript">
 
-<h2>Index</h2>
 
+    //初始化
+    $(function () {
+        emplLogonController.loadList(emplLogonController.getCondition());
+    });
+
+    var emplLogon = {};
+    var emplLogonController = {
+        beginLoading: function () {
+            NProgress.start();
+        },
+        endLoading: function () {
+            NProgress.done();
+        },
+
+        loadList: function (objCondition) {
+            var me = this;
+            $("#btnDelete").hide();
+            me.apendList(objCondition);
+        },
+        apendList: function (objCondition) {
+            var me = this;
+            var obj = $.extend({}, objCondition);
+
+            obj.orderField = $("#hidSortField").attr("data-field");
+            obj.ascending = $("#hidSortField").attr("data-ascending");
+            obj.t = Math.random();
+
+            $('#oa-table-normal').datagrid({
+                url: '/UserManager/LogonList/',
+                method: 'POST',
+                sortName: 'LogonTime',
+                sortOrder: 'desc',
+                queryParams: obj,
+                striped: true,
+                fitColumns: false,
+                singleSelect: false,
+                rownumbers: false,
+                pagination: true,
+                nowrap: false,
+                pageSize: 25,
+                pageList: [25, 50, 100, 150, 200],
+                showFooter: false,
+                columns: [[
+                    { field: 'UserID', title: 'UserID', width: 300 },
+                    {
+                        field: 'LogonTime', title: 'LogonTime', width: 118, sortable: true, formatter: function (val, row) {
+                            return timeStamp2StringShort(row.LogonTime);
+                        }
+                    }
+                ]],
+                frozenColumns: [[
+                    { field: 'ck', checkbox: true },
+                    {
+                        field: 'ID', title: 'ID', width: 300, formatter: function (val, row) {
+                            return row.ID ;
+                        }
+                    }
+                ]],
+
+                onBeforeLoad: function (param) {
+                    me.beginLoading();
+                },
+                onLoadSuccess: function (data) {
+                    me.bindEvents();
+                    me.endLoading();
+                },
+                onLoadError: function () {
+                    me.endLoading();
+                },
+                onSelect: function (index, row) {
+                    me.checkOperButton();
+                },
+                onSelectAll: function (rows) {
+                    me.checkOperButton();
+                },
+                onUnselect: function (index, row) {
+                    me.checkOperButton();
+                },
+                onUnselectAll: function (rows) {
+                    me.checkOperButton();
+                }
+
+            });
+        },
+
+        checkOperButton: function () {
+            var me = this;
+            if (me.getCheckedRecord().length > 0) {
+                $("#btnDelete").show();
+            }
+            else {
+                $("#btnDelete").hide();
+            }
+        },
+
+        getCheckedRecord: function () {
+            var me = this;
+            var idList = '';
+            console.log($('#oa-table-normal').datagrid('getSelections'));
+            idList = $.map($('#oa-table-normal').datagrid('getSelections'), function (v) {
+                return v.ID;
+            }).join(",");
+            return idList;
+        },
+        search: function () {//查询
+            var me = this;
+            me.setFirstPage();
+            var objCondition = me.getCondition();
+            me.loadList(objCondition);
+            $('#dlg_senior_emplLogon').modal('hide');
+            me.highlightSenior();
+        },
+        highlightSenior: function () {
+            $("#oa-senior-searchField [id^=s_]").each(function (i, n) {
+                var sval = $.trim($(this).val());
+                $("#btnSeniorSearch").removeClass("btn-warning");
+                if (sval != "") {
+                    $("#btnSeniorSearch").addClass("btn-warning");
+                    return false;
+                }
+            });
+        },
+        seniorSearch: function () {//高级查询
+            $("#dlg_senior_emplLogon").modal();
+        },
+        getCondition: function () {
+            var objCondition = {};
+            $("#oa-searchField [id^=s_],#oa-senior-searchField [id^=s_]").each(function (i, n) {
+                objCondition[$(this).attr("name")] = $.trim($(this).val());
+            });
+            return objCondition;
+        },
+        clearSearch: function () {//清空查询
+            var me = this;
+            me.setFirstPage();
+            $("#oa-searchField [id^=s_],#oa-senior-searchField [id^=s_]").each(function (i, n) {
+                $(this).val("");
+            });
+            this.loadList();
+            $('#dlg_senior_emplLogon').modal('hide');
+            me.highlightSenior();
+        },
+        setFirstPage: function () {
+            var opts = $('#oa-table-normal').datagrid('options');
+            var pager = $('#oa-table-normal').datagrid('getPager');
+            opts.pageNumber = 1;
+            opts.pageSize = opts.pageSize;
+            pager.pagination('refresh', {
+                pageNumber: 1,
+                pageSize: opts.pageSize
+            });
+        },
+        bindEvents: function () {
+            var me = this;
+            $("#btnSearch").unbind("click").click(function () {
+                me.search();
+            });
+            $("#btnSeniorSearch").unbind("click").click(function () {
+                me.seniorSearch();
+            });
+
+            $("#btnClearSearch").unbind("click").click(function () {
+                me.clearSearch();
+            });
+
+            $("#btn_save").unbind("click").click(function () {
+                me.saveemplLogonMethod();
+            });
+
+            oaController.bindEvents("btnSearch");
+        }
+    }
+</script>
+
+<div id="oa-searchBar" class="oa-searchBar">
+    <div id="oa-searchField" class="oa-searchField">
+        <ul>
+
+            <li>
+                <span>
+                    <label>条件</label>
+                    <input type="text" id="s_txt_name" name="name">
+                </span>
+                <a id="btnSearch" class="btn btn-default btn-sm" href="javascript:">查询</a>
+                <a style="margin-left: 10px" id="btnClearSearch" href="javascript:" class="btn btn-default  btn-sm">清空</a>
+            </li>
+        </ul>
+    </div>
+    <input type="hidden" id="hidSortField" data-field="Createtime" data-ascending="false">
+</div>
+<div id="oa-list">
+    <table id="oa-table-normal" class="table table-striped table-hover"></table>
+</div>
+<div id="oa-page" data-height="0">
+</div>

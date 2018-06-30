@@ -129,6 +129,27 @@
     </environment>
 
 
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/themes/gray/easyui.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/themes/gray/easyui.css" asp-append-version="true" />
+    </environment>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/themes/icon.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/themes/icon.css" asp-append-version="true" />
+    </environment>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/jquery-easyui-extension.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="~/js/Lib/jquery-easyui-1.5.4.4/jquery-easyui-extension.css" asp-append-version="true" />
+    </environment>
+
 
     <environment include="Development">
         <script src="~/js/jquery-3.1.1.min.js" asp-append-version="true"></script>
@@ -246,7 +267,6 @@
         <script src="~/js/Lib/ckeditor_4.6.2/ckeditor.js" asp-append-version="true"></script>
     </environment>
 
-
     <environment include="Development">
         <script src="~/js/Lib/jquery-ui-portal/js/jquery.cookie.js" asp-append-version="true"></script>
     </environment>
@@ -254,6 +274,20 @@
         <script src="~/js/Lib/jquery-ui-portal/js/jquery.cookie.js" asp-append-version="true"></script>
     </environment>
 
+
+    <environment include="Development">
+        <script src="~/js/Lib/jquery-easyui-1.5.4.4/jquery.easyui.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/jquery-easyui-1.5.4.4/jquery.easyui.min.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment include="Development">
+        <script src="~/js/Lib/jquery-easyui-1.5.4.4/locale/easyui-lang-zh_CN.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Lib/jquery-easyui-1.5.4.4/locale/easyui-lang-zh_CN.js" asp-append-version="true"></script>
+    </environment>
 
     <environment include="Development">
         <script src="~/js/base.js" asp-append-version="true"></script>
@@ -265,10 +299,9 @@
     <script type="text/javascript">
         $(function () {
             setlayout();
-
+            setTimeout(function () { gridResize(); }, 100);
 
         });
-
 
         function callbackParentResizeChange() {
             setlayout();
@@ -278,6 +311,16 @@
             } catch (e) {
 
             }
+        }
+        function gridResize() {
+            var min = 2;
+            try {
+                $('#oa-table-normal').datagrid('resize', {
+                    width: $('#oa-list').width() - min,
+                    height: $('#oa-list').height()
+                });
+            }
+            catch (e) { }
         }
     </script>
 
