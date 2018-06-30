@@ -306,8 +306,7 @@
         function callbackParentResizeChange() {
             setlayout();
             try {
-                setTimeout(function () {
-                }, 100);
+                setTimeout(function () { gridResize(); }, 100);
             } catch (e) {
 
             }

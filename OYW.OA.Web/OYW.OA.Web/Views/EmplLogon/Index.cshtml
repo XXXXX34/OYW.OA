@@ -50,8 +50,8 @@
                 columns: [[
                     { field: 'UserID', title: 'UserID', width: 300 },
                     {
-                        field: 'LogonTime', title: 'LogonTime', width: 118, sortable: true, formatter: function (val, row) {
-                            return timeStamp2StringShort(row.LogonTime);
+                        field: 'LogonTime', title: 'LogonTime', width: 218, sortable: true, formatter: function (val, row) {
+                            return timeStamp2String(row.LogonTime);
                         }
                     }
                 ]],
