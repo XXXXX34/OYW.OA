@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Linq.Dynamic.Core;
+using log4net;
 
 namespace OYW.OA.Application.Settings
 {
@@ -13,8 +14,7 @@ namespace OYW.OA.Application.Settings
     {
         private readonly OAEntity db;
         private readonly OAUser user;
-
-        public MenuService(OAEntity db, OAUser user)
+        public MenuService(OAEntity db, OAUser user, ILog log)
         {
             this.db = db;
             this.user = user;
@@ -27,6 +27,9 @@ namespace OYW.OA.Application.Settings
         /// 
         public List<SYS_MenuDTO> GetMenus()
         {
+            var c = 0;
+            var b = 100 / c;
+
             var cur_user_id = user.EmplID;
             var menus = db.SYS_Menu.ToList();
             //非管理员

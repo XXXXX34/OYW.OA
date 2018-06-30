@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -24,9 +29,14 @@ namespace OYW.OA.Web
 {
     public class Startup
     {
+        public static ILoggerRepository loggerRepository { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            loggerRepository = LogManager.CreateRepository("OYW.OA.Web");
+            XmlConfigurator.Configure(loggerRepository, new FileInfo("log4net.config"));
+
         }
 
         public IConfiguration Configuration { get; }
@@ -67,8 +77,12 @@ namespace OYW.OA.Web
             builder.RegisterType(typeof(OAEntity)).AsSelf().InstancePerLifetimeScope();
             builder.RegisterType(typeof(UserMgr)).AsSelf().SingleInstance();
             builder.RegisterType(typeof(RedisHelper)).AsSelf().SingleInstance();
-            builder.RegisterType(typeof(MenuService)).AsSelf().InstancePerLifetimeScope();
+            var applicationServices = Assembly.Load("OYW.OA.Application");
+            builder.RegisterAssemblyTypes(applicationServices)
+           .Where(t => t.Name.EndsWith("Service"))
+           .AsSelf().InstancePerLifetimeScope();
             builder.Register<OAUser>(u => GetCurrentUser()).InstancePerLifetimeScope();
+            builder.Register<ILog>(u => GetLog()).InstancePerLifetimeScope();
         }
 
         private OAUser GetCurrentUser()
@@ -78,6 +92,12 @@ namespace OYW.OA.Web
             accessor.HttpContext.Request.Cookies.TryGetValue("oa.sessionid", out sessionid);
             var redisHelper = IocManager.Resolve<RedisHelper>();
             return redisHelper.Get<OAUser>(sessionid);
+        }
+
+        private ILog GetLog()
+        {
+            var log = LogManager.GetLogger(loggerRepository.Name, typeof(Startup));
+            return log;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -96,14 +116,25 @@ namespace OYW.OA.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseStaticHttpContext();
+
+            app.UseExceptionHandler(x =>
+            {
+                x.Run(async context =>
+                {
+                    var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+                    ILog log = IocManager.Resolve<ILog>();
+                    var msg = ex == null ? "发生错误。" : ex.Message;
+                    log.Error(msg, ex);
+                    context.Response.ContentType = "text/plain;charset=utf-8";
+                    await context.Response.WriteAsync(msg);
+                });
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-
         }
     }
 }
