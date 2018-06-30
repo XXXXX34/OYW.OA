@@ -52,7 +52,9 @@ namespace OYW.OA.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddDbContext<OAEntity>(options => options.UseSqlServer(Configuration.GetConnectionString("OASqlServer")));
+            services.AddDbContext<OAEntity>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("OASqlServer"), b => b.UseRowNumberForPaging())//UseRowNumberForPaging:兼容2008数据库
+            );
             services.AddOptions();
             services.AddHttpContextAccessorSelfDefine();
 
@@ -92,7 +94,7 @@ namespace OYW.OA.Web
             accessor.HttpContext.Request.Cookies.TryGetValue("oa.sessionid", out sessionid);
             var redisHelper = IocManager.Resolve<RedisHelper>();
             var user = redisHelper.Get<OAUser>(sessionid);
-            if (user == null)  user = new OAUser { }; 
+            if (user == null) user = new OAUser { };
             return user;
         }
 
