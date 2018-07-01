@@ -21,7 +21,7 @@ namespace OYW.OA.Infrastructure.Aop
             {
                 invocation.ReturnValue += " AopInterceptor";
             }
-            string methodRes = string.Format("方法执行完毕，返回结果：{0}", JsonConvert.SerializeObject(invocation.ReturnValue));
+            string methodRes = string.Format("方法执行完毕，返回结果：{0}\r\n", JsonConvert.SerializeObject(invocation.ReturnValue));
 
             IocManager.Resolve<ILog>().Info($"{methodInfo}\r\n{methodRes}");
         }

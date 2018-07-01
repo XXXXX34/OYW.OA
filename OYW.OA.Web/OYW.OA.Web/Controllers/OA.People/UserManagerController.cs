@@ -12,7 +12,7 @@ namespace OYW.OA.Web.Controllers
     {
         readonly IUserService userService;
 
-        public UserManagerController(UserService userService)
+        public UserManagerController(IUserService userService)
         {
             this.userService = userService;
         }

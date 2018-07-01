@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OYW.OA.Application.People;
 using OYW.OA.ApplicationInterface.People;
@@ -19,12 +20,13 @@ namespace OYW.OA.Web.Controllers
         readonly OAEntity db;
         readonly UserMgr userMgr;
         readonly IUserService userService;
-
-        public HomeController(OAEntity db, UserMgr userMgr, IUserService userService)
+        readonly IHttpContextAccessor accessor;
+        public HomeController(OAEntity db, UserMgr userMgr, IUserService userService,IHttpContextAccessor accessor)
         {
             this.db = db;
             this.userMgr = userMgr;
             this.userService = userService;
+            this.accessor = accessor;
         }
 
         public IActionResult Index()
@@ -54,7 +56,7 @@ namespace OYW.OA.Web.Controllers
                 userService.Save(new ORG_UserLogonDTO
                 {
                     ID = Guid.NewGuid(),
-                    IP = Request.Host.Value,
+                    IP = accessor.HttpContext.Connection.RemoteIpAddress.ToString(),
                     Location = "",
                     LogonTime = DateTime.Now
                 }, oAUser);

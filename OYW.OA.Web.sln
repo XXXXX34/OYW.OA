@@ -22,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataBase", "DataBase", "{E7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.Application", "OYW.OA.Application\OYW.OA.Application.csproj", "{2059264F-60EC-4E34-B5C5-E8310B65DD49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.ApplicationInterface", "OYW.OA.ApplicationInterface\OYW.OA.ApplicationInterface.csproj", "{4371A3D7-F359-4BF2-8323-A4E4D1E8FC95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.ApplicationInterface", "OYW.OA.ApplicationInterface\OYW.OA.ApplicationInterface.csproj", "{4371A3D7-F359-4BF2-8323-A4E4D1E8FC95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.API", "OYW.OA.API\OYW.OA.API.csproj", "{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +60,10 @@ Global
 		{4371A3D7-F359-4BF2-8323-A4E4D1E8FC95}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4371A3D7-F359-4BF2-8323-A4E4D1E8FC95}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4371A3D7-F359-4BF2-8323-A4E4D1E8FC95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
