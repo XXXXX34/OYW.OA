@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OYW.OA.ApplicationInterface\OYW.OA.ApplicationInterface.csproj" />
     <ProjectReference Include="..\OYW.OA.Domain\OYW.OA.Domain.csproj" />
     <ProjectReference Include="..\OYW.OA.DTO\OYW.OA.DTO.csproj" />
     <ProjectReference Include="..\OYW.OA.EFRepositories\OYW.OA.EFRepositories.csproj" />

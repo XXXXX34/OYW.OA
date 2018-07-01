@@ -8,10 +8,11 @@ using System.Text;
 using System.Linq.Dynamic.Core;
 using log4net;
 using OYW.OA.Infrastructure.User;
+using OYW.OA.ApplicationInterface.Settings;
 
 namespace OYW.OA.Application.Settings
 {
-    public class MenuService
+    public class MenuService : IMenuService
     {
         private readonly OAEntity db;
         private readonly OAUser user;

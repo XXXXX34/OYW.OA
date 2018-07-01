@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Autofac.Extras.DynamicProxy;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -22,6 +23,8 @@ using OYW.OA.Application.Settings;
 using OYW.OA.DTO;
 using OYW.OA.DTO.Redis;
 using OYW.OA.EFRepositories;
+using OYW.OA.Infrastructure;
+using OYW.OA.Infrastructure.Aop;
 using OYW.OA.Infrastructure.Redis;
 using OYW.OA.Web.Models;
 
@@ -55,10 +58,13 @@ namespace OYW.OA.Web
             services.AddDbContext<OAEntity>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("OASqlServer"), b => b.UseRowNumberForPaging())//UseRowNumberForPaging:兼容2008数据库
             );
+
             services.AddOptions();
+
             services.AddHttpContextAccessorSelfDefine();
 
             services.Configure<RedisOption>(Configuration.GetSection("RedisOption"));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => false;
@@ -79,10 +85,14 @@ namespace OYW.OA.Web
             builder.RegisterType(typeof(OAEntity)).AsSelf().InstancePerLifetimeScope();
             builder.RegisterType(typeof(UserMgr)).AsSelf().SingleInstance();
             builder.RegisterType(typeof(RedisHelper)).AsSelf().SingleInstance();
+
+            builder.RegisterType<AopInterceptor>();
             var applicationServices = Assembly.Load("OYW.OA.Application");
             builder.RegisterAssemblyTypes(applicationServices)
-           .Where(t => t.Name.EndsWith("Service"))
-           .AsSelf().InstancePerLifetimeScope();
+           .Where(t => t.Name.EndsWith("Service") && !t.GetTypeInfo().IsAbstract) 
+           .AsImplementedInterfaces().InstancePerLifetimeScope().EnableInterfaceInterceptors().InterceptedBy(typeof(AopInterceptor));//开启拦截
+          
+
             builder.Register<OAUser>(u => GetCurrentUser()).InstancePerLifetimeScope();
             builder.Register<ILog>(u => GetLog()).InstancePerLifetimeScope();
         }

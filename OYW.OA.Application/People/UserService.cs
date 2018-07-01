@@ -10,11 +10,12 @@ using OYW.OA.Domain.People;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using OYW.OA.Infrastructure.User;
+using OYW.OA.ApplicationInterface.People;
 
 namespace OYW.OA.Application.People
 {
 
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly OAEntity db;
         public UserService(OAEntity db)

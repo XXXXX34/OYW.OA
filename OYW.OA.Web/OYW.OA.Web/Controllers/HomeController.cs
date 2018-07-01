@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OYW.OA.Application.People;
+using OYW.OA.ApplicationInterface.People;
 using OYW.OA.DTO;
 using OYW.OA.DTO.People;
 using OYW.OA.EFRepositories;
@@ -17,9 +18,9 @@ namespace OYW.OA.Web.Controllers
     {
         readonly OAEntity db;
         readonly UserMgr userMgr;
-        readonly UserService userService;
+        readonly IUserService userService;
 
-        public HomeController(OAEntity db, UserMgr userMgr, UserService userService)
+        public HomeController(OAEntity db, UserMgr userMgr, IUserService userService)
         {
             this.db = db;
             this.userMgr = userMgr;

@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OYW.OA.Application.People;
+using OYW.OA.ApplicationInterface.People;
 
 namespace OYW.OA.Web.Controllers
 {
     public class UserManagerController : BaseController
     {
-        readonly UserService userService;
+        readonly IUserService userService;
 
         public UserManagerController(UserService userService)
         {
@@ -21,10 +22,5 @@ namespace OYW.OA.Web.Controllers
             return View();
         }
 
-        public JsonResult LogonList(int page, int rows, string sort, string order)
-        {
-            var result = userService.GetLogonList(page, rows, sort, order);
-            return Json(result);
-        }
     }
 }
