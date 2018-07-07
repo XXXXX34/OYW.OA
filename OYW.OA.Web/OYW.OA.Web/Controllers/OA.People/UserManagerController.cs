@@ -10,12 +10,8 @@ namespace OYW.OA.Web.Controllers
 {
     public class UserManagerController : BaseController
     {
-        readonly IUserService userService;
+        public IUserService UserService { get; set; }
 
-        public UserManagerController(IUserService userService)
-        {
-            this.userService = userService;
-        }
 
         public IActionResult Index()
         {

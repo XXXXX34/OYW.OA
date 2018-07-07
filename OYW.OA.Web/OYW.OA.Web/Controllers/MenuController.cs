@@ -11,11 +11,7 @@ namespace OYW.OA.Web.Controllers
 {
     public class MenuController : BaseController
     {
-        IMenuService menuService;
-        public MenuController(IMenuService menuService)
-        {
-            this.menuService = menuService;
-        }
+        public IMenuService MenuService { get; set; }
 
         /// <summary>
         /// 菜单
@@ -24,7 +20,7 @@ namespace OYW.OA.Web.Controllers
         /// 
         public IActionResult GetMenus()
         {
-            var result = menuService.GetMenus();
+            var result = MenuService.GetMenus();
             return Json(new
             {
                 Succeed = true,

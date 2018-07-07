@@ -9,12 +9,9 @@ namespace OYW.OA.Web.Controllers
 {
     public class EmplLogonController : BaseController
     {
-        readonly IUserService userService;
+        public IUserService UserService { get; set; }
 
-        public EmplLogonController(IUserService userService)
-        {
-            this.userService = userService;
-        }
+       
         public IActionResult Index()
         {
             return View();
@@ -23,7 +20,7 @@ namespace OYW.OA.Web.Controllers
 
         public JsonResult LogonList(int page, int rows, string sort, string order)
         {
-            var result = userService.GetLogonList(page, rows, sort, order);
+            var result = UserService.GetLogonList(page, rows, sort, order);
             return Json(result);
         }
     }

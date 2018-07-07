@@ -9,12 +9,8 @@ namespace OYW.OA.Web.Controllers
 {
     public class PeopleManagerController : BaseController
     {
-        private readonly IDepartmentService departmentService;
-
-        public PeopleManagerController(IDepartmentService departmentService)
-        {
-            this.departmentService = departmentService;
-        }
+        public IDepartmentService DepartmentService { get; set; }
+    
         public IActionResult Index()
         {
             return View();
@@ -22,7 +18,7 @@ namespace OYW.OA.Web.Controllers
 
         public ContentResult LoadDept(string node)
         {
-            string result = departmentService.LoadDeptTree(node);
+            string result = DepartmentService.LoadDeptTree(node);
             return Content(result);
         }
 

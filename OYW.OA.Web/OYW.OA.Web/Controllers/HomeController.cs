@@ -19,13 +19,12 @@ namespace OYW.OA.Web.Controllers
     {
         readonly OAEntity db;
         readonly UserMgr userMgr;
-        readonly IUserService userService;
         readonly IHttpContextAccessor accessor;
-        public HomeController(OAEntity db, UserMgr userMgr, IUserService userService,IHttpContextAccessor accessor)
+        public IUserService UserService { get; set; }
+        public HomeController(OAEntity db, UserMgr userMgr,IHttpContextAccessor accessor)
         {
             this.db = db;
             this.userMgr = userMgr;
-            this.userService = userService;
             this.accessor = accessor;
         }
 
@@ -53,7 +52,7 @@ namespace OYW.OA.Web.Controllers
                 userMgr.SetUser(sessionid, oAUser);
                 Response.Cookies.Append("oa.sessionid", sessionid);
 
-                userService.Save(new ORG_UserLogonDTO
+                UserService.Save(new ORG_UserLogonDTO
                 {
                     ID = Guid.NewGuid(),
                     IP = accessor.HttpContext.Connection.RemoteIpAddress.ToString(),
