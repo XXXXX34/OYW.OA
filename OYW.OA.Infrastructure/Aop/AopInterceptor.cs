@@ -19,7 +19,6 @@ namespace OYW.OA.Infrastructure.Aop
             invocation.Proceed();
             if (invocation.ReturnValue != null && invocation.ReturnValue is string)
             {
-                invocation.ReturnValue += " AopInterceptor";
             }
             string methodRes = string.Format("方法执行完毕，返回结果：{0}\r\n", JsonConvert.SerializeObject(invocation.ReturnValue));
 

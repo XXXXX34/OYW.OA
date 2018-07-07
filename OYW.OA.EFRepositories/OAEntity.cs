@@ -18,6 +18,8 @@ namespace OYW.OA.EFRepositories
 
         public virtual DbSet<ORG_UserLogon> ORG_UserLogon { get; set; }
 
+        public virtual DbSet<ORG_Department> ORG_Department { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

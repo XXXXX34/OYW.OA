@@ -1,7 +1,547 @@
 ﻿
 @{
-    ViewData["Title"] = "Index";
+    /**/
+
+    ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<script type="text/javascript">
+
+    function setlayout2() {
+        $("#oa-right").css({ overflow: 'hidden', visibility: 'visible' });
+        var topRow1 = [{ id: "oa-dept-search", width: "fill", height: "auto" }];
+        var middleRow2 = [{ id: "oa-dept-tree", width: "220", height: "fill" }, { id: "oa-dept-content", width: "fill", height: "fill" }];
+        var bottomRow3 = [{ id: "oa-dept-bottom", width: "fill", height: "5" }];
+        $.layoutMY(topRow1, middleRow2, bottomRow3, $("#oa-right"), 0, 50, 3, 2);
+    }
+
+    $(function () {
+        setlayout2();
+        initTree();
+        departmentController.loadEmployeeList('');
+
+        $("#employeelst").delegate("li", "click", function (i, n) {
+            $(this).siblings().removeClass("selected");
+            $(this).addClass("selected");
+
+        });
+        $("body").delegate("#btn-search-empl", "click", function (i, n) {
+            departmentController.loadEmployeeList(cur_node_g.data.key);
+        });
+
+
+    });
+
+    function callbackParentResizeChange() {
+        setlayout2();
+    }
+    function callbackSplitClick() {
+        setlayout2();
+    }
+
+    var cur_node_g = null;
+    function initTree() {
+        $("#tree").dynatree({
+            minExpandLevel: 2,
+            clickFolderMode: 3,
+            initAjax: {
+                url: "/PeopleManager/LoadDept?t=" + Math.random(),
+                data: { node: '0', type: 'readonly' }
+            },
+            onPostInit: function (isReloading, isError) {
+                this.reactivate();
+                var tree = $("#tree").dynatree("getTree");
+                var nod = tree.getNodeByKey("fe6258ca-1ade-4a62-ae9f-dca5d7715da0");
+                nod.toggleExpand();
+                tree.activateKey("fe6258ca-1ade-4a62-ae9f-dca5d7715da0")
+                cur_node_g = tree.getActiveNode();
+            },
+            onActivate: function (node) {
+                try {
+
+                } catch (mg) {
+                    return;
+                }
+            },
+            onLazyRead: function (node) {
+                node.appendAjax({
+                    url: "/PeopleManager/LoadDept",
+                    data: { node: node.data.key, type: 'readonly' },
+                    success: function (node) {
+                    }
+                });
+            },
+            onClick: function (node, event) {
+                cur_node_g = node;
+                departmentController.loadEmployeeList(cur_node_g.data.key);
+            }
+        });
+
+
+    }
+
+
+    var department = {};
+    var people = {};
+    var departmentController = {
+        beginLoading: function () {
+            NProgress.start();
+        },
+        endLoading: function () {
+            NProgress.done();
+        },
+        saveDepartment: function (id) {   //添加、修改
+            var me = this;
+            var parentid = cur_node_g == null ? "" : cur_node_g.data.key;
+            if (parentid == "") { toastr.warning('请选择父结点!'); return; }
+
+            var ID = id;
+            $("#dlg_department").remove(); //保证不会因为缓存影响数据
+            var title = "新建";
+            $("body").append($("<div class=\"modal fade modal-dialog\" id=\"dlg_department\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"> <div class=\"modal-dialog\" role=\"document\"></div></div>"));
+            if (ID == null || ID == undefined || ID == "") {
+            }
+            else {
+                title = "编辑";
+            }
+            me.beginLoading();
+            me.loadEditDepartmentContent(ID, title);
+            $("#dlg_department").modal();
+        },
+        saveEmployee: function (id) {  //添加、修改
+            var me = this;
+            var deptid = cur_node_g == null ? "" : cur_node_g.data.key;
+            if (deptid == "") { toastr.warning('请选择部门!'); return; }
+
+            var ID = id;
+            $("#dlg_employee").remove(); //保证不会因为缓存影响数据modal-lg modal-full
+            var title = "新建";
+            $("body").append($("<div class=\"modal fade modal-dialog\" id=\"dlg_employee\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"> <div class=\"modal-dialog\" role=\"document\"></div></div>"));
+            if (ID == null || ID == undefined || ID == "") {
+            }
+            else {
+                title = "编辑";
+            }
+            me.beginLoading();
+            me.loadEditEmployeeContent(ID, title);
+            $("#dlg_employee").modal();
+        },
+        saveEmployeeMethod: function (single) {
+            var me = this;
+
+            people.EmplBirth = $("#txtEmplBirth").val();
+            people.AttendDate = $("#txtAttendDate").val();
+
+            people.UserName = $("#txtUserName").val();
+            people.UserDisabled = $("#ddlUserDisabled").val();
+            people.UserPwd = $("#txtUserPwd").val();
+            people.UserPwdReapeat = $("#txtUserPwdReapeat").val();
+
+
+            var validate = checkSubmit("peopleForm"); //验证数据是否合法
+            if (validate == false) {//验证未通过
+                toastr.warning('信息填写不完整!')
+            }
+            else {
+                $.post('/PeopleManager/SaveEmployee', people, function (data) {
+                    if (data.Succeed == true) {
+                        $('#dlg_employee').modal('hide');
+                        departmentController.loadEmployeeList(cur_node_g.data.key);
+                    }
+                    else {
+                        toastr.error(data.Message); //保存失败
+                    }
+                }, 'json');
+            }
+        },
+        loadEditEmployeeContent: function (ID, title) {
+            var deptid = cur_node_g == null ? "" : cur_node_g.data.key;
+            var me = this;
+            me.beginLoading();
+            $("#dlg_employee").load('/PeopleManager/EmployeeEdit/' + ID + '?t=' + Math.random(), function () {
+                me.bindEvents();
+                $("#modalTitle").html(title);
+
+                $.post('/PeopleManager/EmployeeDetails/' + ID + '?t=' + Math.random(), {}, function (data) {
+                    if (data.Succeed == true) {
+                        me.endLoading();
+                        way.registerBindings();
+                        people = data.Data;
+                        if (title == "新建") {
+                            people.DeptName = cur_node_g.data.title;
+                            people.DeptID = deptid;
+                        }
+                        else {
+                            if (people.UserExist == true)
+                                $("tr[name=accout]").hide();
+                        }
+                        formatModel(people);
+                        people.EmplBirth = timeStamp2StringShort(people.EmplBirth);
+                        people.AttendDate = timeStamp2StringShort(people.AttendDate);
+                        way.set("peopleScope", people);
+                        me.endLoading();
+                    }
+                    else {
+                        toastr.error(data.Message); //保存失败
+                    }
+                }, 'json');
+
+            });
+        },
+
+        loadEmployeeList: function (deptid) {
+            var me = this;
+            $.post('/PeopleManager/EmployeeList/' + deptid + '?t=' + Math.random(), { emplName: $("#txtEmplName").val() }, function (data) {
+                if (data.Succeed == true) {
+                    me.endLoading();
+                    var html = [];
+                    $("#employeelst li").remove();
+                    $(data.Data).each(function (i, n) {
+                        html.push("<li class='' name='emplitem' data-id='" + n.EmplID + "'>");
+                        html.push("            <div class=\"oa-dept-content-left\">");
+                        html.push("                <div>");
+                        html.push("                    <img style=\"width:46px;height:46px\" src=\"/IM/ShowImplHeader/" + n.EmplID + "\" />");
+                        html.push("                </div>");
+                        html.push("                <div class=\"oa-dept-content-left-lg\"><a href=\"javascript:\" onclick=\"departmentController.saveEmployee('" + n.EmplID + "')\">" + n.UserName + "</a></div>");
+                        html.push("            </div>");
+                        html.push("            <div class=\"oa-dept-content-right\">");
+                        html.push("                <div class=\"oa-dept-content-right-name\"><a href=\"javascript:\" onclick=\"departmentController.saveEmployee('" + n.EmplID + "')\">" + n.EmplName + "</a></div>");
+                        html.push("                <div class=\"oa-dept-content-right-position\">");
+                        html.push("                    <ul>");
+                        html.push("                        <li>" + n.DeptName + "-" + n.PosName + "</li>");
+                        html.push("                    </ul>");
+                        html.push("                    <ul>");
+                        html.push("                        <li>" + (n.Mobile || '') + "</li>");
+                        html.push("                    </ul>");
+                        html.push("                </div>");
+                        html.push("            </div>");
+
+                        html.push("<div class='img-circle' style='background-color:" + (n.IsOnline ? "#5cb85c" : "#eee") + "; width: 10px; height: 10px;position: absolute;bottom: 0;right: 0; '></div>");
+
+                        html.push("        </li>");
+                    });
+
+                    $("#employeelst").append(html.join(" "));
+                    me.endLoading();
+
+                }
+                else {
+                    toastr.error(data.Message); //保存失败
+                }
+            }, 'json');
+
+
+        },
+
+        loadEditDepartmentContent: function (ID, title) {
+            var parentid = cur_node_g == null ? "" : cur_node_g.data.key;
+            var me = this;
+            me.beginLoading();
+            $("#dlg_department").load('/PeopleManager/DepartmentEdit/' + ID + '?t=' + Math.random(), function () {
+                me.bindEvents();
+                $("#modalTitle").html(title);
+
+                $.post('/PeopleManager/DepartmentDetails/' + ID + '?t=' + Math.random(), {}, function (data) {
+                    if (data.Succeed == true) {
+                        me.endLoading();
+                        way.registerBindings();
+                        department = data.Data;
+                        if (title == "新建") {
+                            department.ParentID = parentid;
+                        }
+                        formatModel(department);
+
+                        way.set("departmentScope", department);
+                        me.endLoading();
+                    }
+                    else {
+                        toastr.error(data.Message); //保存失败
+                    }
+                }, 'json');
+
+                me.bindEvents();
+            });
+        },
+        saveDepartmentMethod: function (single) {
+            var me = this;
+            var validate = checkSubmit("departmentForm"); //验证数据是否合法
+            if (validate == false) {//验证未通过
+                toastr.warning('信息填写不完整!')
+            }
+            else {
+                $.post('/PeopleManager/SaveDepartment', me.getModel(), function (data) {
+                    if (data.Succeed == true) {
+                        $('#dlg_department').modal('hide');
+                        me.loadList();
+
+                    }
+                    else {
+                        toastr.error(data.Message); //保存失败
+                    }
+                }, 'json');
+            }
+        },
+        getModel: function () {
+            return department;
+        },
+        validateDepartmentData: function () {    //验证
+            var result = "";
+            if (result != "")
+                return result.substr(0, result.length - 1) + "不能为空!";
+            return result;
+        },
+        deleteEmployee: function () {
+            var me = this;
+            var id = $("#employeelst li[name=emplitem][class=selected]").attr("data-id");
+            if (!id) { toastr.warning('请选择要删除的数据!'); return; }
+
+            bootbox.confirm("确认删除", function (cp) {
+                if (cp) {
+                    $.post('/PeopleManager/DeleteEmployee/?id=' + id + '&t=' + Math.random(), function (data) {
+                        if (data.Succeed == true) {
+                            me.loadEmployeeList(cur_node_g.data.key);
+                            toastr.success("删除成功");//成功
+                        }
+                        else {
+                            toastr.error(data.Message);
+                        }
+                    }, 'json');
+                }
+            });
+        },
+        disableEmployee: function () {
+            var me = this;
+            var id = $("#employeelst li[name=emplitem][class=selected]").attr("data-id");
+            if (!id) { toastr.warning('请选择离职的员工!'); return; }
+
+            bootbox.confirm("确认离职", function (cp) {
+                if (cp) {
+                    $.post('/PeopleManager/DisableEmployee/?id=' + id + '&t=' + Math.random(), function (data) {
+                        if (data.Succeed == true) {
+                            me.loadEmployeeList(cur_node_g.data.key);
+                            toastr.success("操作成功");//成功
+                        }
+                        else {
+                            toastr.error(data.Message);
+                        }
+                    }, 'json');
+                }
+            });
+        },
+        deleteDepartment: function () {    //删除
+            var me = this;
+            var id = cur_node_g == null ? "" : cur_node_g.data.key;
+            if (id == "") { toastr.warning('请选择要删除的数据!'); return; }
+            bootbox.confirm("确认删除", function (cp) {
+                if (cp) {
+                    $.post('/PeopleManager/DeleteDepartment/?id=' + id + '&t=' + Math.random(), function (data) {
+                        if (data.Succeed == true) {
+                            me.loadList();
+                            cur_node_g = null;
+                            toastr.success("删除成功");//成功
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    }, 'json');
+                }
+            });
+        },
+        loadList: function () {
+
+            try {
+                cur_node_g.reloadChildren(function (node, isOk) { });
+            }
+            catch (e) {
+                cur_node_g.getParent().reloadChildren(function (node, isOk) { });
+            }
+        },
+
+        bindEvents: function () {
+
+
+            $("#txtDeptName").unbind("click").click(function () {
+                oa.people.getDept({
+                    mutil: false,
+                    ok: function (r) {
+                        people.DeptName = r[0].deptName;
+                        people.DeptID = r[0].deptID;
+                        way.set("peopleScope", people);
+                    }
+                });
+            });
+
+            $("#txtPosName").unbind("click").click(function () {
+                oa.people.getPos({
+                    ok: function (r) {
+                        people.PosName = r[0].posName;
+                        people.PosID = r[0].posID;
+                        way.set("peopleScope", people);
+                    }
+                });
+            });
+
+            $("#txtManagerName").unbind("click").click(function () {
+                oa.people.getPeople({
+                    ok: function (r) {
+                        people.ManagerName = r[0].emplName;
+                        people.ManagerID = r[0].emplID;
+                        way.set("peopleScope", people);
+                    }
+                });
+            });
+
+        }
+    }
+
+</script>
+
+<style type="text/css">
+    #oa-dept-search {
+        border: 0px solid black;
+    }
+
+    #oa-dept-tree {
+        border: 0px solid black;
+    }
+
+    #oa-dept-content {
+        border-left: 1px solid #ccc;
+    }
+
+        #oa-dept-content ul {
+            margin: 0;
+            padding: 0;
+        }
+
+            #oa-dept-content ul li {
+                width: 270px;
+                height: 110px;
+                margin: 10px 10px;
+                background-color: #fbfdff;
+                display: block;
+                float: left;
+                border-radius: 3px 3px;
+                position:relative
+            }
+    
+
+
+    #oa-dept-content ul li.selected {
+        background-color: #eae5e5;
+    }
+
+                #oa-dept-content ul li .oa-dept-content-left {
+                    float: left;
+                    margin: 10px 10px;
+                }
+
+                #oa-dept-content ul li .oa-dept-content-left-lg {
+                    margin: 10px 0 0 0;
+                    text-align: center;
+                }
+
+                #oa-dept-content ul li .oa-dept-content-right {
+                    float: left;
+                    margin: 10px 10px;
+                }
+
+                #oa-dept-content ul li .oa-dept-content-right-name {
+                    font-weight: bold;
+                    font-size: 16px;
+                }
+
+                #oa-dept-content ul li .oa-dept-content-right-position {
+                }
+
+                    #oa-dept-content ul li .oa-dept-content-right-position ul {
+                        list-style-type: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                        #oa-dept-content ul li .oa-dept-content-right-position ul li {
+                            float: none;
+                            background-color: transparent;
+                            width: auto;
+                            margin: 5px 0 0 0;
+                            padding: 0;
+                            height: auto;
+                        }
+
+    #oa-dept-bottom {
+        border: 0px solid black;
+    }
+
+    #oa-dept-oper {
+        margin-top: 7px;
+    }
+
+    #peopleForm .row {
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+        #peopleForm .row label {
+            text-align: right;
+            font-weight: normal;
+        }
+</style>
+<div id="oa-dept-oper">
+    <div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                部门 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                @if (true)
+                {
+                    <li><a href="javascript:" onclick="departmentController.saveDepartment('')">添加子部门</a></li>
+                    <li><a href="javascript:" onclick="departmentController.saveDepartment(cur_node_g.data.key)">编辑部门</a></li>
+                    <li><a href="javascript:" onclick="departmentController.deleteDepartment()">删除部门</a></li>
+                }
+            </ul>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                人员 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                @if (true)
+                {
+                    <li><a href="javascript:" onclick="departmentController.saveEmployee()">添加人员</a></li>
+                    <li><a href="javascript:" onclick="departmentController.disableEmployee()">已离职</a></li>
+                    <li><a href="javascript:" onclick="departmentController.deleteEmployee()">删除人员</a></li>
+                }
+            </ul>
+        </div>
+        <div class="btn-group" style="float:right;margin-right:20px">
+            <button id="btn-search-empl" class="btn btn-primary">查询</button>
+        </div>
+        <div class="btn-group" style="float:right;margin-right:20px">
+            <div class="form-inline">
+                <div class="form-group" style="max-width:300px">
+                    <div class="input-group">
+                        <div class="input-group-addon">姓名</div>
+                        <input type="text" class="form-control " style="max-width:300px" id="txtEmplName">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="oa-dept-search">
+
+</div>
+<div id="oa-dept-tree">
+    <div id="tree"></div>
+</div>
+<div id="oa-dept-content">
+    <ul id="employeelst"></ul>
+</div>
+<div id="oa-dept-bottom"></div>
+<input type="hidden" id="hidPKID" />
 
