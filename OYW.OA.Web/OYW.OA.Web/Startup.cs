@@ -72,7 +72,7 @@ namespace OYW.OA.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());//实现属性注入
+            services.Replace(ServiceDescriptor.Transient<IControllerActivator, ServiceBasedControllerActivator>());//控制器属性注入
 
             services.AddMvc().AddJsonOptions(op => op.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver())
                                           .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -97,11 +97,11 @@ namespace OYW.OA.Web
             var applicationServices = Assembly.Load("OYW.OA.Application");
             builder.RegisterAssemblyTypes(applicationServices)
            .Where(t => t.Name.EndsWith("Service") && !t.GetTypeInfo().IsAbstract)
-           .AsImplementedInterfaces().InstancePerLifetimeScope().PropertiesAutowired().EnableInterfaceInterceptors().InterceptedBy(typeof(AopInterceptor));//开启拦截
+           .AsImplementedInterfaces().InstancePerLifetimeScope().EnableInterfaceInterceptors().InterceptedBy(typeof(AopInterceptor));//开启拦截
 
             var _IControllerType = typeof(ControllerBase);
             builder.RegisterAssemblyTypes(this.GetType().Assembly).Where(t =>
-                            _IControllerType.IsAssignableFrom(t) && t != _IControllerType).PropertiesAutowired();//实现属性注入
+                            _IControllerType.IsAssignableFrom(t) && t != _IControllerType).PropertiesAutowired();//控制器属性注入
 
             builder.Register<OAUser>(u => GetCurrentUser()).InstancePerLifetimeScope();
             builder.Register<ILog>(u => GetLog()).InstancePerLifetimeScope();
