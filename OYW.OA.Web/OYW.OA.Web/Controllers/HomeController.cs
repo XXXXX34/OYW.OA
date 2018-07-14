@@ -31,6 +31,7 @@ namespace OYW.OA.Web.Controllers
 
         public IActionResult Index()
         {
+            throw new OYWValidationException("验证失败！");
             return View();
         }
 
