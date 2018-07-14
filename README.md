@@ -6,7 +6,3 @@ OA权限管理系统
 数据库：MSSQL Express
 
 NoSQL:Redis
-
-用户名：admin  密码：admin
-
-演示地址：http://39.108.168.178:5000
