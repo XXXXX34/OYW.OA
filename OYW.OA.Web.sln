@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.ApplicationInterface
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.API", "OYW.OA.API\OYW.OA.API.csproj", "{01DA5CEF-2DFF-4DAE-81BD-43F3FA9419F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OYW.OA.XUnitTest", "OYW.OA.XUnitTest\OYW.OA.XUnitTest.csproj", "{D3055A3D-3FD5-428D-9F14-70F6414C21B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OYW.OA.XUnitTest", "OYW.OA.XUnitTest\OYW.OA.XUnitTest.csproj", "{D3055A3D-3FD5-428D-9F14-70F6414C21B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

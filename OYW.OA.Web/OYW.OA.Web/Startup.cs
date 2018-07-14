@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Extras.DynamicProxy;
+using Exceptionless;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -27,6 +28,7 @@ using OYW.OA.EFRepositories;
 using OYW.OA.Infrastructure;
 using OYW.OA.Infrastructure.Aop;
 using OYW.OA.Infrastructure.Redis;
+using OYW.OA.Web.Exceptionless;
 using OYW.OA.Web.Models;
 
 namespace OYW.OA.Web
@@ -140,18 +142,23 @@ namespace OYW.OA.Web
             app.UseCookiePolicy();
             app.UseStaticHttpContext();
 
-            app.UseExceptionHandler(x =>
-            {
-                x.Run(async context =>
-                {
-                    var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
-                    ILog log = IocManager.Resolve<ILog>();
-                    var msg = ex == null ? "发生错误。" : ex.Message;
-                    log.Error(msg, ex);
-                    context.Response.ContentType = "text/plain;charset=utf-8";
-                    await context.Response.WriteAsync(msg);
-                });
-            });
+            #region Exceptionless
+            app.UseExceptionless(Configuration);
+            app.UseMiddleware<OYWExceptionlessMiddleware>(ExceptionlessClient.Default);
+            #endregion
+
+            //app.UseExceptionHandler(x =>
+            //{
+            //    x.Run(async context =>
+            //    {
+            //        var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+            //        ILog log = IocManager.Resolve<ILog>();
+            //        var msg = ex == null ? "发生错误。" : ex.Message;
+            //        log.Error(msg, ex);
+            //        context.Response.ContentType = "text/plain;charset=utf-8";
+            //        await context.Response.WriteAsync(msg);
+            //    });
+            //});
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

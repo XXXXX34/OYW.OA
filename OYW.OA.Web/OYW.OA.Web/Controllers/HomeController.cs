@@ -10,6 +10,7 @@ using OYW.OA.ApplicationInterface.People;
 using OYW.OA.DTO;
 using OYW.OA.DTO.People;
 using OYW.OA.EFRepositories;
+using OYW.OA.Infrastructure;
 using OYW.OA.Infrastructure.Encrypt;
 using OYW.OA.Web.Models;
 
@@ -21,7 +22,7 @@ namespace OYW.OA.Web.Controllers
         readonly UserMgr userMgr;
         readonly IHttpContextAccessor accessor;
         public IUserService UserService { get; set; }
-        public HomeController(OAEntity db, UserMgr userMgr,IHttpContextAccessor accessor)
+        public HomeController(OAEntity db, UserMgr userMgr, IHttpContextAccessor accessor)
         {
             this.db = db;
             this.userMgr = userMgr;
