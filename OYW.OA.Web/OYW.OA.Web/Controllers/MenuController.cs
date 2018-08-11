@@ -21,7 +21,7 @@ namespace OYW.OA.Web.Controllers
         public IActionResult GetMenus()
         {
             var i = 100;
-
+               
             var result = MenuService.GetMenus();
             return Json(new
             {
