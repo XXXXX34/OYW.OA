@@ -8,7 +8,7 @@ namespace OYW.OA.Web.Controllers
 {
     public class WelcomeController : BaseController
     {
-        public IActionResult 1Desktop()
+        public IActionResult Desktop()
         {
             return View();
         }
